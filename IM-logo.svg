@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 128 128" fill="none" stroke="black" stroke-width="2"><path d="M 4 4 Q 64 68 124 4 Z M 48 4 Q 112 64 48 124 Z M 4 124 Q 64 60 124 124 Z" stroke-linejoin="round"/></svg>
+<!--
+4 px padding, means can only have stroke-width=8 before cutting off edges.
+Arc control points are 64 pixels away from line, meaning radius is 32px
+-->
