@@ -1,0 +1,63 @@
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.main-container{
+    display: flex;
+    height: 100vh;
+}
+
+.nav-container{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+
+}
+
+.settings-container{
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    width: 30%
+}
+
+.image-explainer-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: black;
+}
+
+.images-display-grid{
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: 1fr 1fr;
+}
+
+.original-image-container{
+    grid-column: 1;
+    background-color: purple;
+    display: flex;
+    flex-direction: column;
+}
+
+.filtered-image-container{
+    grid-column: 2;
+    background-color: yellow;
+    display: flex;
+    flex-direction: column;
+}
+
+.explainer-container{
+    background-color: violet;
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+}
+
+.hidden{
+    display: none;
+}
