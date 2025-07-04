@@ -9,18 +9,19 @@
     height: 100vh;
 }
 
+
+
 .nav-container{
-    background-color: red;
+    background-color: white;
     display: flex;
     flex-direction: column;
     width: 10%;
-
 }
 
-.settings-container{
-    background-color: blue;
+
+#settings-container{
+    background-color: #efefef;
     display: flex;
-    flex-direction: column;
     width: 30%
 }
 
@@ -28,7 +29,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background-color: black;
+    height: 100%;
 }
 
 .images-display-grid{
@@ -39,23 +40,29 @@
 
 .original-image-container{
     grid-column: 1;
-    background-color: purple;
+    background-color: #dfdfdf;
     display: flex;
     flex-direction: column;
 }
 
 .filtered-image-container{
     grid-column: 2;
-    background-color: yellow;
+    background-color: #cfcfcf;
     display: flex;
     flex-direction: column;
 }
 
-.explainer-container{
-    background-color: violet;
+#explainer-container{
+    background-color: #bfbfbf;
     display: flex;
     flex-direction: column;
-    height: 30%;
+    height: 40%;
+}
+
+#explainer-visibility-btn{
+    width: 100px;
+    position:relative;
+    top: -2rem
 }
 
 .hidden{

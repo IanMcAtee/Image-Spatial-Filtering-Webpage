@@ -14,19 +14,77 @@
         /* Montserrat Font */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
+    <!-- Import the ViewModel Script-->
+    <script src="./viewmodel.js" charset="UTF-8" defer></script>
 </head>
 
 <body>
     <main class="main-container">
-        <div class="nav-container"></div>
-        <div class="settings-container"></div>
+        <div class="nav-container">
+            <ul>
+                <li><button class="settings-nav-btn" data-nav-target="custom">Custom</button></li>
+                <li>
+                    <button class="header-nav-btn">Linear Filters</button>
+                    <ul class="nav-submenu-container hidden">
+                        <li>
+                            <button class="header-nav-btn">Smoothing</button>
+                            <ul class="nav-submenu-container hidden">
+                                <li><button class="settings-nav-btn" data-nav-target="box-filter">Box Filter</button></li>
+                                <li><button class="settings-nav-btn" data-nav-target="gaussian">Gaussian</button></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button class="header-nav-btn">Sharpening</button>
+                            <ul class="nav-submenu-container hidden">
+                                <li><button class="settings-nav-btn" data-nav-target="laplacian">Laplacian</button></li>
+                                <li><button class="settings-nav-btn" data-nav-target="unsharp-masking">Unsharp Masking</button></li>
+                                <li><button class="settings-nav-btn" data-nav-target="sobel">Sobel Edge Detection</button></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="header-nav-btn">Non-Linear Filters</button>
+                    <ul class="nav-submenu-container hidden">
+                        <li><button class="settings-nav-btn" data-nav-target="median">Median</button></li>
+                        <li><button class="settings-nav-btn" data-nav-target="min">Minimum</button></li>
+                        <li><button class="settings-nav-btn" data-nav-target="max">Maximum</button></li>
+                        <li><button class="settings-nav-btn" data-nav-target="midpoint">Midpoint</button></li>
+                        <li><button class="settings-nav-btn" data-nav-target="alpha-trimmed-mean">Alpha Trimmed Mean</button></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="settings-container">
+            <h2>Custom Settings</h2>
+        </div>
+
         <div class="image-explainer-container">
             <div class="images-display-grid">
                 <div class="original-image-container"></div>
                 <div class="filtered-image-container"></div>
             </div>
-            <div class="explainer-container"></div>
+            <div id="explainer-container">
+                <button id="explainer-visibility-btn">Toggle</button>
+            </div>
         </div>
     </main>
 </body>
+
+<!-- PREDEFINED SETTINGS PANES (HIDDEN FROM MAIN VIEW)-->
+<div id="custom-settings" class="hidden">
+    <h2>Custom Settings</h2>
+</div>
+
+<div id="box-filter-settings" class="hidden">
+    <h2>Box Filter Settings</h2>
+</div>
+
+<div id="gaussian-settings" class="hidden">
+    <h2>Gaussian Smoothing Settings</h2>
+</div>
+
+
 </html>
+
