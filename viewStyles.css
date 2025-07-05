@@ -30,6 +30,7 @@
     flex-direction: column;
     flex-grow: 1;
     height: 100%;
+    width: 60%;
 }
 
 .images-display-grid{
@@ -43,6 +44,8 @@
     background-color: #dfdfdf;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .filtered-image-container{
@@ -50,6 +53,8 @@
     background-color: #cfcfcf;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #explainer-container{
@@ -57,13 +62,15 @@
     display: flex;
     flex-direction: column;
     height: 40%;
+    overflow-y: scroll;
 }
 
 #explainer-visibility-btn{
-    width: 100px;
-    position:relative;
-    top: -2rem
+    width: 7rem;
+    
 }
+
+
 
 .hidden{
     display: none;
