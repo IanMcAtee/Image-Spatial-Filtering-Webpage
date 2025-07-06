@@ -1,7 +1,15 @@
+:root {
+  --accentColor: rgb(127, 255, 212);
+}
 
 *{
     padding: 0;
     margin: 0;
+    font-family: Montserrat;
+}
+
+ul{
+    list-style: none;
 }
 
 .main-container{
@@ -9,20 +17,93 @@
     height: 100vh;
 }
 
-
-
-.nav-container{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    width: 10%;
+h1{
+    font-size: 1.3rem;
+    margin-left: 1rem;
 }
 
+
+/* NAVIGATION PANE PROPERTIES ----------------------------------------------------------*/
+.nav-grid{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100vh;
+    width: 10%;
+    border: solid;
+    border-width: 0px 4px 0px 0px;
+}
+
+.logo-title-cell-container{
+    grid-row: 1;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title-container{
+    display: flex;
+    align-items: center;
+}
+
+
+.filter-type-nav-container{
+    grid-row: 2;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-nav-container{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.header-nav-btn{
+    width: 10rem;
+    height: 2rem;
+    border: none;
+    border-radius: 10px;
+    margin: 0.25rem 0rem;
+    font-weight: 600;
+}
+
+.settings-nav-btn{
+    width: 10rem;
+    height: 2rem;
+    border: none;
+    border-radius: 10px;
+    margin: 0.25rem 0rem;
+    font-weight: 600;
+}
+
+.indent-level-1{
+    margin-left: 1rem;
+}
+
+.indent-level-2{
+    margin-left: 2rem;
+}
+
+/* SETTINGS PANE PROPERTIES -------------------------------------------------- */
 
 #settings-container{
     background-color: #efefef;
     display: flex;
-    width: 30%
+    flex-direction: column;
+    width: 30%;
+}
+
+#kernel-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: fit-content;
+}
+
+.kernel-cell{
+    width: 3.5rem;
 }
 
 .image-explainer-container{

@@ -20,44 +20,68 @@
 
 <body>
     <main class="main-container">
-        <div class="nav-container">
-            <ul>
-                <li><button class="settings-nav-btn" data-nav-target="custom">Custom</button></li>
-                <li>
-                    <button class="header-nav-btn">Linear Filters</button>
-                    <ul class="nav-submenu-container hidden">
-                        <li>
-                            <button class="header-nav-btn">Smoothing</button>
-                            <ul class="nav-submenu-container hidden">
-                                <li><button class="settings-nav-btn" data-nav-target="box-filter">Box Filter</button></li>
-                                <li><button class="settings-nav-btn" data-nav-target="gaussian">Gaussian</button></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <button class="header-nav-btn">Sharpening</button>
-                            <ul class="nav-submenu-container hidden">
-                                <li><button class="settings-nav-btn" data-nav-target="laplacian">Laplacian</button></li>
-                                <li><button class="settings-nav-btn" data-nav-target="unsharp-masking">Unsharp Masking</button></li>
-                                <li><button class="settings-nav-btn" data-nav-target="sobel">Sobel Edge Detection</button></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="header-nav-btn">Non-Linear Filters</button>
-                    <ul class="nav-submenu-container hidden">
-                        <li><button class="settings-nav-btn" data-nav-target="median">Median</button></li>
-                        <li><button class="settings-nav-btn" data-nav-target="min">Minimum</button></li>
-                        <li><button class="settings-nav-btn" data-nav-target="max">Maximum</button></li>
-                        <li><button class="settings-nav-btn" data-nav-target="midpoint">Midpoint</button></li>
-                        <li><button class="settings-nav-btn" data-nav-target="alpha-trimmed-mean">Alpha Trimmed Mean</button></li>
-                    </ul>
-                </li>
-            </ul>
+        <div class="nav-grid">
+            <div class="logo-title-cell-container">
+                <div class="logo-title-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 128 128" fill="none" stroke="black" stroke-width="8"><path d="M 4 4 Q 64 68 124 4 Z M 48 4 Q 112 64 48 124 Z M 4 124 Q 64 60 124 124 Z" stroke-linejoin="round"/></svg>
+                    <h1>Spatial<br/>Filter<br/>Lab</h1>
+                </div>
+            </div>
+            <div class="filter-type-nav-container">
+                <ul>
+                    <li><button class="settings-nav-btn" data-nav-target="custom">Custom</button></li>
+                    <li>
+                        <button class="header-nav-btn">Linear Filters</button>
+                        <ul class="nav-submenu-container indent-level-1 hidden">
+                            <li>
+                                <button class="header-nav-btn">Smoothing</button>
+                                <ul class="nav-submenu-container indent-level-2 hidden">
+                                    <li><button class="settings-nav-btn" data-nav-target="box-filter">Box Filter</button></li>
+                                    <li><button class="settings-nav-btn" data-nav-target="gaussian">Gaussian</button></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button class="header-nav-btn">Sharpening</button>
+                                <ul class="nav-submenu-container indent-level-2 hidden">
+                                    <li><button class="settings-nav-btn" data-nav-target="laplacian">Laplacian</button></li>
+                                    <li><button class="settings-nav-btn" data-nav-target="unsharp-masking">Unsharp Masking</button></li>
+                                    <li><button class="settings-nav-btn" data-nav-target="sobel">Sobel Edge Detection</button></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="header-nav-btn">Non-Linear Filters</button>
+                        <ul class="nav-submenu-container indent-level-1 hidden">
+                            <li><button class="settings-nav-btn" data-nav-target="median">Median</button></li>
+                            <li><button class="settings-nav-btn" data-nav-target="min">Minimum</button></li>
+                            <li><button class="settings-nav-btn" data-nav-target="max">Maximum</button></li>
+                            <li><button class="settings-nav-btn" data-nav-target="midpoint">Midpoint</button></li>
+                            <li><button class="settings-nav-btn" data-nav-target="alpha-trimmed-mean">Alpha Trimmed Mean</button></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-nav-container">
+                <ul>
+                    <li><button>Select Image</button></li>
+                    <li><button>About</button></li>
+                </ul>
+            </div>
         </div>
+        
 
         <div id="settings-container">
-            <h2>Custom Settings</h2>
+            <h2>Custom Kernel</h2>
+            <h3>Kernel Size:</h3>
+            <input id="kernel-size-input" type="number" min="3" max="9" step="2"/>
+            <h3>Kernel:</h3>
+            <div id="kernel-grid"></div>
+            <h3>Padding Type</h3>
+            <button>Zero</button>
+            <button>Replicate</button>
+            <button>Mirror</button>
+
         </div>
 
         <div class="image-explainer-container">

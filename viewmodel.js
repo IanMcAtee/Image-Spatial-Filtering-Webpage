@@ -22,10 +22,10 @@ Array.from(headerNavBtns).forEach(btn => {
     btn.addEventListener("click", toggleSubmenu)
 });
 
-const explainerContainer = document.getElementById("explainer-container");
-explainerContainer.style.height = "40%";
-const explainerVisibilityBtn = document.getElementById("explainer-visibility-btn");
-explainerVisibilityBtn.addEventListener("click", toggleExplainerContainerHeight)
+//const explainerContainer = document.getElementById("explainer-container");
+//explainerContainer.style.height = "40%";
+//const explainerVisibilityBtn = document.getElementById("explainer-visibility-btn");
+//explainerVisibilityBtn.addEventListener("click", toggleExplainerContainerHeight)
 
 function navigateToSettingsPanel(event)
 {
@@ -98,5 +98,39 @@ function toggleElementVisibility(element)
     }
 }
 
-console.log(settingsContainer);
-console.log(boxFilterSettingsHTML);
+
+// SETTINGS CONTAINER PROPERTIES ///////////////////
+let kernelSizeInput = document.getElementById("kernel-size-input");
+let kernelSize = 3;
+let kernelGrid = document.getElementById("kernel-grid");
+kernelSizeInput.oninput = updateKernelSize;
+console.log(`Original number of cells: ${kernelGrid.children.length}`);
+
+
+function updateKernelSize()
+{
+    kernelSize = kernelSizeInput.value;
+    console.log(kernelSize);
+    let oldCells = kernelGrid.children;
+    console.log(`Number of old cells: ${oldCells.length}`)
+
+    // Clear old cells
+    kernelGrid.innerHTML = "";
+
+    console.log(`Number of old cells after clearing: ${oldCells.length}`)
+
+    // Reformat grid layout
+    kernelGrid.style.gridTemplateColumns = `repeat(${kernelSize}, 1fr)`;
+    kernelGrid.style.gridTemplateRows = `repeat(${kernelSize}, 1fr)`;
+
+    console.log(`Grid Template Rows: ${kernelGrid.style.gridTemplateRows}`);
+
+    // Add new cells
+    for (let i = 0; i < kernelSize*kernelSize; i++)
+    {
+        let newCell = document.createElement("input");
+        newCell.type = "number";
+        newCell.classList.add("kernel-cell");
+        kernelGrid.appendChild(newCell);
+    }
+}
