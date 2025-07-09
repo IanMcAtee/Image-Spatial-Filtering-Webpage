@@ -1,83 +1,112 @@
+/* 
+File: styles.css
+Author: Ian McAtee
+Description:
+  The style sheet for the Spatial Filter Lab website 
+*/
+
+/* CSS VARIABLES ----------------------------------------------------------*/
+
 :root {
-  --accentColor: rgb(127, 255, 212);
+  --navPanelBackgroundColor: #FFFFFF;
+  --settingsPanelBackgroundColor: #FFFFFF;
+  --imageDisplayPanelBackgroundColor: #EFEFEF;
+  --explainerPanelBackgroundColor: #FFFFFF;
+  --accentColor: #5e8df3;
+  --defaultFont: Montserrat;
+  --btnToggledColor: #a1a5d4;
+  --btnUntoggledColor: #EFEFEF;
 }
 
-*{
+/* GLOBAL PROPERTIES -----------------------------------------------------*/
+
+/* Remove padding/margin for all elemnts */
+*{ 
     padding: 0;
     margin: 0;
-    font-family: Montserrat;
 }
 
-ul{
-    list-style: none;
+/* Set defaults for all text elements */
+h1, h2, h3, h4, h5, h6, p {
+    font-family: var(--defaultFont);
 }
 
-.main-container{
-    display: flex;
-    height: 100vh;
-}
-
+/* Custom style the main heading */
 h1{
     font-size: 1.3rem;
     margin-left: 1rem;
 }
 
+/* Remove bullets from lists, as they are elements used for nav */
+ul{
+    list-style: none;
+}
 
-/* NAVIGATION PANE PROPERTIES ----------------------------------------------------------*/
+/* Set the main container as a row flexbox */
+.main-container{
+    display: flex;
+    height: 100vh;
+}
+
+
+/* NAVIGATION PANEL PROPERTIES ----------------------------------------------------------*/
+
+/* Set the navgational panel as a 3 row grid */
 .nav-grid{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     height: 100vh;
-    width: 10%;
+    width: 15%;
     border: solid;
     border-width: 0px 4px 0px 0px;
 }
 
+/* Logo and title cell */
 .logo-title-cell-container{
     grid-row: 1;
-    background-color: blue;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    margin-top: 2rem;
+    border: solid;
+    border-width: 0px 0px 2px 0px;
 }
 
-.logo-title-container{
-    display: flex;
-    align-items: center;
-}
-
-
+/* The filter type nav panel */
 .filter-type-nav-container{
     grid-row: 2;
-    background-color: red;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+/* The bottom nav panel */
 .bottom-nav-container{
     display: flex;
     flex-direction: column-reverse;
 }
 
+/* Header navigation buttons */
 .header-nav-btn{
     width: 10rem;
     height: 2rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     margin: 0.25rem 0rem;
     font-weight: 600;
 }
 
+/* Settings navigation buttons */
 .settings-nav-btn{
     width: 10rem;
     height: 2rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     margin: 0.25rem 0rem;
     font-weight: 600;
 }
 
+/* The indent levels for nested nav buttons */
 .indent-level-1{
     margin-left: 1rem;
 }
