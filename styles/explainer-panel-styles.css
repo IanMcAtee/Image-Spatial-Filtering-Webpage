@@ -1,0 +1,30 @@
+/* SCRIPT: explainer-panel-styles.css */
+/* DESCRIPTION: The explainer panel style sheet */
+
+#explainer-container{
+    background-color: #bfbfbf;
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    overflow-y: scroll;
+    border: solid;
+    border-width: 4px 0px 0px 0px;
+}
+
+#explainer-visibility-btn{
+    width: 5rem;
+    height: 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accentColor);
+    margin-left: 1rem;
+    
+}
+
+#explainer-up-icon{
+    display: none;
+}
+
+#explainer-down-icon{
+    display: inline;
+}

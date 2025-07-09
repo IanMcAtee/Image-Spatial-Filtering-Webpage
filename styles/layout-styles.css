@@ -1,0 +1,41 @@
+/* SCRIPT: layout-styles.css */
+/* DESCRIPTION: The main layout style sheet */
+
+@import url("./global-styles.css");
+
+/* Set the main container as a row flexbox */
+#main-container{
+    display: flex;
+    height: 100vh;
+}
+
+/* Navigation panel container */
+#nav-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: fit-content;
+    border: solid;
+    border-width: 0px 4px 0px 0px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Settings panel container */
+#settings-container{
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    padding: 2rem;
+}
+
+/* The image/explainer container */
+#image-explainer-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    background-color: #dfdfdf;
+}

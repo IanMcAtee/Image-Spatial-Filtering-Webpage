@@ -1,0 +1,48 @@
+/* SCRIPT: globalStyles */
+/* DESCRIPTION: The global style sheet */
+
+/* CSS Global Variables ----------------------------------------------------------*/
+
+:root {
+  --navPanelBackgroundColor: #FFFFFF;
+  --settingsPanelBackgroundColor: #FFFFFF;
+  --imageDisplayPanelBackgroundColor: #EFEFEF;
+  --explainerPanelBackgroundColor: #FFFFFF;
+  --accentColor: #a1a5d4;
+  --defaultFont: Montserrat;
+  --btnToggledColor: #a1a5d4;
+  --btnUntoggledColor: #EFEFEF;
+}
+
+/* Global Properties ------------------------------------------------------------*/
+
+/* Remove padding/margin for all elemnts */
+*{ 
+    padding: 0;
+    margin: 0;
+}
+
+/* Set defaults for all text elements */
+h1, h2, h3, h4, h5, h6, p {
+    font-family: var(--defaultFont);
+}
+
+/* Custom style the main heading */
+h1{
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+h2{
+    margin-bottom: 1rem;
+}
+
+/* Remove bullets from lists, as they are elements used for nav */
+ul{
+    list-style: none;
+}
+
+/* Class to show/hide elements */
+.hidden{
+    display: none;
+}

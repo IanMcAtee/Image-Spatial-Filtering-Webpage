@@ -1,0 +1,27 @@
+/* SCRIPT: image-display-panel-styles.css */
+/* DESCRIPTION: The image display panel style sheet */
+
+@import url("./global-styles.css");
+
+.images-display-grid{
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: 1fr 1fr;
+    
+}
+
+.original-image-container{
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.filtered-image-container{
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

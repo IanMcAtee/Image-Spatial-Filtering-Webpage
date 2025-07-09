@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Spatial Filtering</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <h1>Spatial Filtering</h1>
+    
+    <canvas id="MainImageCanvas">
+    </canvas>
+
+    <button 
+        id="DisplayImageBtn" 
+        type="button"
+        data-img-path="./peppers.png">
+        Display Original Image
+    </button>
+
+    <button
+        id="ApplyPaddingBtn"
+        type="button"
+        data-padding-type="zero">
+        Apply Padding
+    </button>
+
+    <button
+        id="SpatialFilterBtn"
+        type="button">
+        Spatial Filter
+    </button>
+     
+    
+
+    <script src="./spatialfiltering.js" charset="UTF-8"></script>
+</body>
+</html>

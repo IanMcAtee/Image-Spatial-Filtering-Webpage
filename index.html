@@ -3,38 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Spatial Filtering</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Spatial Filtering Lab</title>
+
+    <!-- Import CSS Styles-->
+    <link rel="stylesheet" href="./styles/global-styles.css">
+    <link rel="stylesheet" href="./styles/layout-styles.css">
+    <link rel="stylesheet" href="./styles/nav-panel-styles.css">
+    <link rel="stylesheet" href="./styles/settings-panel-styles.css">
+    <link rel="stylesheet" href="./styles/image-display-panel-styles.css">
+    <link rel="stylesheet" href="./styles/explainer-panel-styles.css">
+
+    <!-- Import MathJax for Mathematical Typesetting -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
+    <!-- Import Google Fonts -->
+    <style>
+        /* Montserrat Font */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    
+    <!-- Import the ViewModel Scripts-->
+    <script type="module" src="./view-models/global-view-model.js" defer></script>
+    <script type="module" src="./view-models/nav-panel-view-model.js" defer></script>
+    <script type="module" src="./view-models/explainer-panel-view-model.js" defer></script>
 </head>
+
 <body>
-    <h1>Spatial Filtering</h1>
-    
-    <canvas id="MainImageCanvas">
-    </canvas>
+    <main id="main-container">
+        <div id="nav-container">
+            <div class="logo-title-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 128 128" fill="none" stroke="black" stroke-width="8"><path d="M 4 4 Q 64 68 124 4 Z M 48 4 Q 112 64 48 124 Z M 4 124 Q 64 60 124 124 Z" stroke-linejoin="round"/></svg>
+                <h1>Spatial<br/>Filter<br/>Lab</h1>
+            </div>
+            <div class="filter-type-nav-container">
+                <h2>Filter Type</h2>
+                <ul>
+                    <li>
+                        <button id="default-settings-nav-btn" class="settings-nav-btn" 
+                            data-settings-html-path="./views/settings-views/custom-settings-view.html"
+                            data-explainer-html-path="./views/explainer-views/custom-explainer-view.html">
+                            Custom
+                        </button>
+                    </li>
+                    <li>
+                        <button class="header-nav-btn">Linear Filters</button>
+                        <ul class="nav-submenu-container indent-level-1 hidden">
+                            <li>
+                                <button class="header-nav-btn">Smoothing</button>
+                                <ul class="nav-submenu-container indent-level-2 hidden">
+                                    <li>
+                                        <button class="settings-nav-btn" 
+                                            data-settings-html-path="./views/settings-views/box-settings-view.html"
+                                            data-explainer-html-path="./views/explainer-views/box-explainer-view.html">
+                                            Box Filter
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="settings-nav-btn" 
+                                            data-settings-html-path="./views/settings-views/gaussian-settings-view.html"
+                                            data-explainer-html-path="./views/explainer-views/gaussian-explainer-view.html">
+                                            Gaussian
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <button class="header-nav-btn">Sharpening</button>
+                                <ul class="nav-submenu-container indent-level-2 hidden">
+                                    <li>
+                                        <button class="settings-nav-btn" 
+                                            data-settings-html-path="./views/settings-views/laplacian-settings-view.html"
+                                            data-explainer-html-path="./views/explainer-views/laplacian-explainer-view.html">
+                                            Laplacian
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="settings-nav-btn" 
+                                            data-settings-html-path="./views/settings-views/unsharp-masking-settings-view.html"
+                                            data-explainer-html-path="./views/explainer-views/unsharp-masking-explainer-view.html">
+                                            Unsharp Masking
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="settings-nav-btn" 
+                                            data-settings-html-path="./views/settings-views/sobel-settings-view.html"
+                                            data-explainer-html-path="./views/explainer-views/sobel-explainer-view.html">
+                                            Sobel Edge Detection
+                                        </button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="header-nav-btn">Non-Linear Filters</button>
+                        <ul class="nav-submenu-container indent-level-1 hidden">
+                            <li>
+                                <button class="settings-nav-btn" 
+                                    data-settings-html-path="./views/settings-views/median-settings-view.html"
+                                    data-explainer-html-path="./views/explainer-views/median-explainer-view.html">
+                                    Median
+                                </button>
+                            </li>
+                            <li>
+                                <button class="settings-nav-btn" 
+                                    data-settings-html-path="./views/settings-views/minimum-settings-view.html"
+                                    data-explainer-html-path="./views/explainer-views/minimum-explainer-view.html">
+                                    Minimum
+                                </button>
+                            </li>
+                            <li>
+                                <button class="settings-nav-btn" 
+                                    data-settings-html-path="./views/settings-views/maximum-settings-view.html"
+                                    data-explainer-html-path="./views/explainer-views/maximum-explainer-view.html">
+                                    Maximum
+                                </button>
+                            </li>
+                            <li>
+                                <button class="settings-nav-btn" 
+                                    data-settings-html-path="./views/settings-views/midpoint-settings-view.html"
+                                    data-explainer-html-path="./views/explainer-views/midpoint-explainer-view.html">
+                                    Midpoint
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom-nav-container">
+                <ul>
+                    <li><button class="settings-nav-btn" data-nav-target="image-select">Select Image</button></li>
+                    <li><button class="settings-nav-btn" data-nav-target="about">About</button></li>
+                </ul>
+            </div>
+        </div>
+        
 
-    <button 
-        id="DisplayImageBtn" 
-        type="button"
-        data-img-path="./peppers.png">
-        Display Original Image
-    </button>
+        <div id="settings-container">
+            <div id="filter-specific-settings-container"></div>
+            <button class="apply-filter-btn">Filter</button>
+        </div>
 
-    <button
-        id="ApplyPaddingBtn"
-        type="button"
-        data-padding-type="zero">
-        Apply Padding
-    </button>
-
-    <button
-        id="SpatialFilterBtn"
-        type="button">
-        Spatial Filter
-    </button>
-     
-    
-
-    <script src="./spatialfiltering.js" charset="UTF-8"></script>
+        <div id="image-explainer-container">
+            <div class="images-display-grid">
+                <div class="original-image-container">
+                    <div class="title-image-container">
+                        <h2>Original</h2>
+                        <img src="./images/peppers.png"/>
+                    </div>
+                </div>
+                <div class="filtered-image-container">
+                    <div class="title-image-container">
+                        <h2>Filtered</h2>
+                        <img src="./images/peppers.png"/>
+                    </div>
+                </div>
+            </div>
+            <button id="explainer-visibility-btn">
+                <svg id="explainer-up-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m280-400 200-200 200 200H280Z"/></svg>
+                <svg id="explainer-down-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M480-360 280-560h400L480-360Z"/></svg>
+            </button>
+            <div id="explainer-container">
+                
+            </div>
+        </div>
+    </main>
 </body>
+
+
 </html>
+
