@@ -1,19 +1,22 @@
 
 class SpatialFilter
 {
-    static filter(padArr, filterFunc, nhoodSize)
+    static filter(padArr, nhoodSize, padType, filterFunc)
     {   
-        console.log("Im a filter");
+        let nhArr = this.getNeighborhood(padArr, 1, 1, nhoodSize);
+        console.log(nhArr);
+        let max = filterFunc(nhArr);
+        console.log(max);
     }
 
-    #getNeighborhood(arr, rowInd, colInd, nhoodSize)
+    static getNeighborhood(arr, rowInd, colInd, nhoodSize)
     {
         let halfSlice = Math.floor(nhoodSize/2)
-        nhoodArr = [];
-        for (let i = rowInd-halfSlice; i < rowInd+halfSlice; i++)
+        let nhoodArr = [];
+        for (let i = rowInd-halfSlice; i <= rowInd+halfSlice; i++)
         {
             let row = [];
-            for (let j = colInd-halfSlice; j < colInd+halfSlice; j++)
+            for (let j = colInd-halfSlice; j <= colInd+halfSlice; j++)
             {
                 row.push(arr[i][j]);
             }
@@ -35,42 +38,33 @@ class SpatialFilter
         }
     }
 
+    static convolve(nhoodArr, kernel)
+    {
+        console.log("Convolving");
+        // let sum = 0;
+        // for (let i = 0; i < nhoodArr.length; i++)
+        // {
+        //     for (let j = 0; j < nhoodArr[0].length; j++)
+        //     {
+        //         sum += nhoodArr[i][j] * kernel[i][j]
+        //     }
+        // }
+        // return sum; 
+    }
+
+
 
 }
 
-class LinearFilter extends SpatialFilter
+export class BoxFilter extends SpatialFilter
 {
-    constructor(kernel)
+    static filter()
     {
-        this.kernel = kernel;
-        this.convolve = (nhoodArr, kernel) => {
-            let sum = 0;
-            for (let i = 0; i < nhoodArr.length; i++)
-            {
-                for (let j = 0; j < nhoodArr[0].length; j++)
-                {
-                    sum += nhoodArr[i][j] * kernel[i][j]
-                }
-            }
-            return sum;
-        };
+        
     }
 }
 
-class NonlinearFilter extends SpatialFilter
-{
-    static filter(imgArr, nhoodSize, padType, filterFunc)
-    {
-        super(filter(imgArr, nhoodSize, padType, filterFunc));
-    }
-}
-
-export class BoxFilter extends LinearFilter
-{
-    
-}
-
-export class MedianFilter extends NonlinearFilter
+export class MedianFilter 
 {
     constructor(nhoodSize)
     {
@@ -90,13 +84,9 @@ export class MedianFilter extends NonlinearFilter
             }
         };
     }
-    filter(imgArr)
-    {
-        super(filter(imgArr, this.medianFunction))
-    }
 }
 
-export class MaxFilter
+export class MaxFilter extends SpatialFilter
 {
     static filter(imgArr, nhoodSize, padType)
     {
@@ -105,7 +95,7 @@ export class MaxFilter
             nHoodArr = nHoodArr.flat();
             return Math.max(...nHoodArr);
         }
-        super(filter(imgArr, nhoodSize, padType, maxFunc));
+        super.filter(imgArr, nhoodSize, padType, maxFunc);
     }
 }
 
