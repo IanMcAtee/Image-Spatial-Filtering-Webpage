@@ -1,5 +1,5 @@
 // Import the global viewmodel
-import * as spatialFilter from "./spatial-filter-new.js";
+import * as spatialFilter from "./spatial-filter.js";
 
 function printArray (arr)
 {

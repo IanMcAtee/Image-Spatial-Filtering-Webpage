@@ -1,15 +1,50 @@
 
+
 class SpatialFilter
 {
-    static filter(padArr, nhoodSize, padType, filterFunc)
-    {   
-        let nhArr = this.getNeighborhood(padArr, 1, 1, nhoodSize);
-        console.log(nhArr);
-        let max = filterFunc(nhArr);
-        console.log(max);
+    static applyPadding(arr, padWidth, padType)
+    {
+        switch (padType)
+        {
+            case PadType.ZERO:
+                return this.zeroPad(arr, padWidth);
+                break;
+            case PadType.REPLICATE:
+                return this.replicatePad(arr, padWidth);
+                break;
+            case PadType.MIRROR:
+                return this.mirrorPad(arr. padWidth);
+                break;
+        }
     }
 
-    static getNeighborhood(arr, rowInd, colInd, nhoodSize)
+    static zeroPad(arr, padWidth)
+    {
+        // Preallocate the padded array with zeros
+        let padArr = Array.from({ length: arr.length+(2*padWidth) }, () => new Array(arr[0].length+(2*padWidth)).fill(0));
+        // Fill the interior of the padded array with the original values
+        for (let i = 0; i < arr.length; i++)
+        {
+            for (let j = 0; j < arr[0].length; j++)
+            {
+                padArr[i+padWidth][j+padWidth] = arr[i][j];
+            }
+        }
+        // Return the zero-padded array
+        return padArr;
+    }
+
+    static replicatePad(arr, padWidth)
+    {
+        throw new Error("Not Implemented Exception");
+    }
+
+    static mirrorPad(arr, padWidth)
+    {
+        throw new Error("Not Implemented Exception");
+    }
+
+    static getNeighborhoodArray(arr, rowInd, colInd, nhoodSize)
     {
         let halfSlice = Math.floor(nhoodSize/2)
         let nhoodArr = [];
@@ -24,78 +59,126 @@ class SpatialFilter
         }
         return nhoodArr;
     }
+}
 
-    #applyPadding(arr, padType)
+class LinearFilter extends SpatialFilter
+{
+    static filter(arr, kernel, padType)
     {
-        switch (padType)
-        {
-            case PadType.ZERO:
-                break;
-            case PadType.REPLICATE:
-                break;
-            case PadType.MIRROR:
-                break;
-        }
+
     }
 
     static convolve(nhoodArr, kernel)
     {
-        console.log("Convolving");
-        // let sum = 0;
-        // for (let i = 0; i < nhoodArr.length; i++)
-        // {
-        //     for (let j = 0; j < nhoodArr[0].length; j++)
-        //     {
-        //         sum += nhoodArr[i][j] * kernel[i][j]
-        //     }
-        // }
-        // return sum; 
-    }
 
-
-
-}
-
-export class BoxFilter extends SpatialFilter
-{
-    static filter()
-    {
-        
     }
 }
 
-export class MedianFilter 
+class NonLinearFilter extends SpatialFilter
 {
-    constructor(nhoodSize)
+    static filter(arr, nHoodSize, padType, filterFunc)
     {
-        this.nhoodSize = nhoodSize;
-        this.medianFunction = (arr) =>
+        // Calculate necessary padding and apply
+        let padWidth = Math.floor(nHoodSize/2);
+        let padArr = super.applyPadding(arr, padWidth, padType);
+        // Preallocate the output array
+        let outputArr = Array.from({ length: arr.length }, () => new Array(arr[0].length).fill(0));
+        // Preallocate the neighborhood array
+        let nhoodArr = Array.from({ length: nHoodSize }, () => new Array(nHoodSize).fill(0));
+        // Perform the filtering
+        for (let i = 0; i < outputArr.length; i++)
+        {
+            for (let j = 0; j < outputArr[0].length; j++)
+            {
+                // Get the current neighborhood
+                nhoodArr = super.getNeighborhoodArray(padArr, i+padWidth, j+padWidth, nHoodSize);
+                // Apply the nonlinear filter function
+                outputArr[i][j] = filterFunc(nhoodArr);
+            }
+        }
+        // Return the filtered output
+        return outputArr;
+    }
+}
+
+// -------------------- LINEAR FILTERS --------------------
+
+// Smoothing Filters --------------------------------------
+
+export class BoxFilter extends LinearFilter
+{
+
+}
+
+export class GaussianFilter extends LinearFilter
+{
+
+}
+
+// Sharpening Filters --------------------------------------
+
+export class LaplacianFilter extends LinearFilter
+{
+
+}
+
+export class UnsharpMaskingFilter extends LinearFilter
+{
+
+}
+
+export class SobelFilter extends LinearFilter
+{
+
+}
+
+// -------------------- NON-LINEAR FILTERS --------------------
+
+export class MedianFilter extends NonLinearFilter
+{
+    static filter(arr, nhoodSize, padType)
+    {
+        let medianFunc = (arr) =>
         {
             arr = arr.flat();
             arr.sort((a, b) => a - b);
-            let midPoint = Math.floor(arr.length / 2);
+            let midInd = Math.floor(arr.length/2);
             if (arr.length % 2 != 0)
             {
-                return arr[midPoint];
+                return arr[midInd];
             }
             else
             {
-                return (arr[midPoint] + arr[midPoint+1])/2
+                return (arr[midInd]+arr[midInd+1])/2; 
             }
         };
+        return super.filter(arr, nhoodSize, padType, medianFunc);
     }
 }
 
-export class MaxFilter extends SpatialFilter
+export class MaxFilter extends NonLinearFilter
 {
-    static filter(imgArr, nhoodSize, padType)
+    static filter(arr, nhoodSize, padType)
     {
-        let maxFunc = (nHoodArr) =>
+        let maxFunc = (arr) =>
         {
-            nHoodArr = nHoodArr.flat();
-            return Math.max(...nHoodArr);
-        }
-        super.filter(imgArr, nhoodSize, padType, maxFunc);
+            arr = arr.flat();
+            return Math.max(...arr);
+        };
+        return super.filter(arr, nhoodSize, padType, maxFunc);
+    }
+}
+
+export class MinFilter extends NonLinearFilter
+{
+    static filter(arr, nhoodSize, padType)
+    {
+        let minFunc = (arr) =>
+        {
+            arr = arr.flat();
+            return Math.min(...arr);
+        };
+        return super.filter(arr, nhoodSize, padType, minFunc);
     }
 }
 
@@ -107,6 +190,3 @@ export const PadType =
     REPLICATE: "replicate",
     MIRROR: "mirror"
 };
-
-
-
