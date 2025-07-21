@@ -1,6 +1,6 @@
 
 
-class SpatialFilter
+export class SpatialFilter
 {
     static applyPadding(arr, padWidth, padType)
     {
@@ -36,7 +36,19 @@ class SpatialFilter
 
     static replicatePad(arr, padWidth)
     {
-        throw new Error("Not Implemented Exception");
+        // Preallocate the padded array with zeros
+        let padArr = Array.from({ length: arr.length+(2*padWidth) }, () => new Array(arr[0].length+(2*padWidth)).fill(0));
+        // Replicate pad along rows first
+        for (let i = 0; i < padArr.length; i++)
+        {
+            let sourceRow = Math.max(0, Math.min(arr.length-1, i-padWidth));
+            for (let j = 0; j < padArr[0].length; j++)
+            {
+                let sourceCol = Math.max(0, Math.min(arr.length[0]-1, j-padWidth));
+                padArr[i][j] = arr[sourceRow][sourceCol];
+            }
+        }
+        return padArr;
     }
 
     static mirrorPad(arr, padWidth)
@@ -171,6 +183,13 @@ export class MaxFilter extends NonLinearFilter
 
 export class MinFilter extends NonLinearFilter
 {
+    /**
+     * @method
+     * @summary Changes the color of the shape.
+     * @param {Array<Array<number>>} arr - The new color to set for the shape
+     * @param {number} nhoodSize - The size of the square neighborhood of values upon which the filter operates 
+     * @returns {Array} The minimum filtered array output
+     */
     static filter(arr, nhoodSize, padType)
     {
         let minFunc = (arr) =>

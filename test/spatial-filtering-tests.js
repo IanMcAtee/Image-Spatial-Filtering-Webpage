@@ -1,9 +1,9 @@
 // Import the global viewmodel
 import * as spatialFilter from "./spatial-filter.js";
 
-function printArray (arr)
+function printArray(arr)
 {
-
+    
 }
 const testArr = [[ 1, 2, 3, 4, 5],
                  [ 6, 7, 8, 9,10],
@@ -13,8 +13,6 @@ const testArr = [[ 1, 2, 3, 4, 5],
 
 console.log(testArr);
 
-let maxOutput = spatialFilter.MaxFilter.filter(testArr, 3, spatialFilter.PadType.ZERO);
-let minOutput = spatialFilter.MinFilter.filter(testArr, 3, spatialFilter.PadType.ZERO);
+let zeroPadArr = spatialFilter.SpatialFilter.zeroPad(testArr, 4);
 
-console.log(maxOutput);
-console.log(minOutput);
+console.log(zeroPadArr);
